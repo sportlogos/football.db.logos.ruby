@@ -10,3 +10,15 @@ sportdb-logos gem - sport team logos bundled for reuse w/ asset pipeline
 ## Usage
 
 TBD
+
+
+
+
+## Dev Notes
+
+Use 
+
+    $ rake debug_gem > sportdb-logos.gemspec
+
+to update (auto-generate) gemspec.
+
