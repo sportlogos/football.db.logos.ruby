@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sportdb-logos}
-  s.version = "0.0.1"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Gerald Bauer"]
-  s.date = %q{2013-08-09}
+  s.date = %q{2013-08-10}
   s.description = %q{sportdb-logos gem - sports team logos (24x24, 32x32, 48x48, 64x64) bundled for reuse w/ asset pipeline}
   s.email = %q{opensport@googlegroups.com}
   s.extra_rdoc_files = ["History.md", "Manifest.txt", "README.md"]
