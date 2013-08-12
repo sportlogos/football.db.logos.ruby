@@ -9,7 +9,7 @@ Hoe.spec 'sportdb-logos' do
   self.summary = 'sportdb-logos gem - sports team logos (24x24, 32x32, 48x48, 64x64) bundled for reuse w/ asset pipeline'
   self.description = summary
 
-  self.urls    = ['https://github.com/geraldb/sport.db.logos']
+  self.urls    = ['https://github.com/geraldb/sport.db.logos.ruby']
 
   self.author  = 'Gerald Bauer'
   self.email   = 'opensport@googlegroups.com'
@@ -26,8 +26,14 @@ end
 
 # ls *.jpg | xargs -r -I FILE convert FILE -thumbnail 64x64 FILE_thumb.png
 
-LOGO_SIZES = [24,32,48,64]  # e.g. 24x24, 32x32, etc.
-LOGO_INPUT_DIR = 'originals'
+## LOGO_SIZES = [24,32,48,64]  # e.g. 24x24, 32x32, etc.
+# for now use only 24x24 and 32x32 to save disk space
+LOGO_SIZES = [24,32] 
+
+
+# NB: logos reside in its own repo! - clone as a sibling to this repo to make it work
+LOGO_INPUT_DIR = '../sport.db.logos'
+
 LOGO_OUTPUT_DIR = 'vendor/assets/images/logos'
 
 
@@ -38,19 +44,23 @@ task :build_thumbs do
 
   files.each do |filename|
     extname  = File.extname( filename )
-    basename = File.basename( filename, extname )   # NB: remove extname (that is, suffix e.g. .png,.jpg,.gif etc.)
+    basename_in  = File.basename( filename, extname )   # NB: remove extname (that is, suffix e.g. .png,.jpg,.gif etc.)
 
-    puts "filename: #{filename}, basename: #{basename}, extname: #{extname}"
+    # strip leading 1-west-  (optional for organizing logos)
+    #  e.g. 3-west-austrias  becomes austrias
+    basename_out = basename_in.gsub( /[0-9a-z]+-/, '' )
+
+    puts "filename: #{filename}, basename_in: #{basename_in}, basename_out: #{basename_out}, extname: #{extname}"
 
     LOGO_SIZES.each do |size|
 
       ## make sure outputdir exits
       FileUtils.mkpath( "#{LOGO_OUTPUT_DIR}/#{size}x#{size}" )  unless File.exists?( "#{LOGO_OUTPUT_DIR}/#{size}x#{size}" )
 
-      # e.g. convert #{filename} -thumbnail 48x48 vendor/assets/images/labels/48x48/#{basename}.png"
-      cmd = "convert #{filename} -thumbnail #{size}x#{size} #{LOGO_OUTPUT_DIR}/#{size}x#{size}/#{basename}.png"
+      # e.g. convert #{filename} -thumbnail 48x48 vendor/assets/images/labels/48x48/#{basename_out}.png"
+      cmd = "convert #{filename} -thumbnail #{size}x#{size} #{LOGO_OUTPUT_DIR}/#{size}x#{size}/#{basename_out}.png"
       puts "  #{cmd}"
-      system( cmd )
+      # system( cmd )
     end
   end
   
@@ -72,10 +82,15 @@ task :build_manifest  do
     # force extension  to .png
 
     extname  = File.extname( filename )
-    basename = File.basename( filename, extname )   # NB: remove extname (that is, suffix e.g. .png,.jpg,.gif etc.)
+    basename_in = File.basename( filename, extname )   # NB: remove extname (that is, suffix e.g. .png,.jpg,.gif etc.)
 
-    puts "filename: #{filename}, basename: #{basename}, extname: #{extname}"
-    "#{basename}.png"
+    # strip leading 1-west-  (optional for organizing logos)
+    #  e.g. 3-west-austrias  becomes austrias
+    basename_out = basename_in.gsub( /[0-9a-z]+-/, '' )
+
+    puts "filename: #{filename}, basename_in: #{basename_in}, basename_out: #{basename_out}, extname: #{extname}"
+
+    "#{basename_out}.png"
   end
   files.sort!
 
