@@ -60,10 +60,10 @@ task :build_thumbs do
       # e.g. convert #{filename} -thumbnail 48x48 vendor/assets/images/labels/48x48/#{basename_out}.png"
       cmd = "convert #{filename} -thumbnail #{size}x#{size} #{LOGO_OUTPUT_DIR}/#{size}x#{size}/#{basename_out}.png"
       puts "  #{cmd}"
-      # system( cmd )
+      system( cmd )
     end
   end
-  
+
   ## todo: generate lookup list of all available labels (lets us check if label exists)
   puts 'Done.'
 end
