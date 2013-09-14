@@ -1,4 +1,4 @@
-module SportDb::Logos
+module FootballDb::Logos
 
   class Engine < Rails::Engine
     # NB: get rails to add app/assets, lib/assets and vendor/assets
@@ -11,4 +11,4 @@ module SportDb::Logos
     #  - http://guides.rubyonrails.org/asset_pipeline.html#adding-assets-to-your-gems
   end
 
-end # module SportDb::Logos
+end # module FootballDb::Logos

@@ -1,15 +1,15 @@
 require 'hoe'
-require './lib/sportdb/logos/version.rb'
+require './lib/footballdb/logos/version.rb'
 
 
-Hoe.spec 'sportdb-logos' do
+Hoe.spec 'footballdb-logos' do
 
-  self.version = SportDb::Logos::VERSION
+  self.version = FootballDb::Logos::VERSION
 
-  self.summary = 'sportdb-logos gem - sports team logos (24x24, 32x32, 48x48, 64x64) bundled for reuse w/ asset pipeline'
+  self.summary = 'footballdb-logos gem - football team logos (24x24, 32x32, 48x48, 64x64) bundled for reuse w/ asset pipeline'
   self.description = summary
 
-  self.urls    = ['https://github.com/geraldb/sport.db.logos.ruby']
+  self.urls    = ['https://github.com/geraldb/football.db.logos.ruby']
 
   self.author  = 'Gerald Bauer'
   self.email   = 'opensport@googlegroups.com'
@@ -32,12 +32,12 @@ LOGO_SIZES = [24,32]
 
 
 # NB: logos reside in its own repo! - clone as a sibling to this repo to make it work
-LOGO_INPUT_DIR = '../sport.db.logos'
+LOGO_INPUT_DIR = '../football.db.logos'
 
 LOGO_OUTPUT_DIR = 'vendor/assets/images/logos'
 
 
-desc 'sportdb-logos - build thumbs'
+desc 'footballdb-logos - build thumbs'
 task :build_thumbs do
 
   files = Dir[ "#{LOGO_INPUT_DIR}/**/*.{png,gif,jpg}" ]
@@ -69,7 +69,7 @@ task :build_thumbs do
 end
 
 
-desc 'sportdb-logos - build manifest'
+desc 'footballdb-logos - build manifest'
 task :build_manifest  do
 
   txt = File.read( 'Manifest.txt.tpl' )
@@ -109,5 +109,5 @@ end
 
 
 
-desc 'sportdb-logos - build thumbnails from originals'
+desc 'footballdb-logos - build thumbnails from originals'
 task :build => [:build_thumbs, :build_manifest]
