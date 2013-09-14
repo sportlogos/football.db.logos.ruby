@@ -6,7 +6,7 @@ Hoe.spec 'footballdb-logos' do
 
   self.version = FootballDb::Logos::VERSION
 
-  self.summary = 'footballdb-logos gem - football team logos (24x24, 32x32, 48x48, 64x64) bundled for reuse w/ asset pipeline'
+  self.summary = 'footballdb-logos gem - football league club logos (24x24, 32x32, 48x48, 64x64) bundled for reuse w/ asset pipeline'
   self.description = summary
 
   self.urls    = ['https://github.com/geraldb/football.db.logos.ruby']
