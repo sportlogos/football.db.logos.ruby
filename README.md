@@ -12,4 +12,8 @@ bundled for reuse w/ asset pipeline
 TBD
 
 
+## Album Pages (Preview)
+
+- [24x24](http://sportlogos.github.io/football.db.logos.ruby/24.html)
+- [32x32](http://sportlogos.github.io/football.db.logos.ruby/32.html)
 
