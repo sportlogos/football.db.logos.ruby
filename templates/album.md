@@ -7,7 +7,7 @@
 
   {% section.pictures.each do |picture| %}
     ..
-    {{ picture.title }}  ++
+    _{{ picture.title }}_{:.key} ++
     ![{{ picture.title }}]({{ picture.path }})
   {% end %}
 
