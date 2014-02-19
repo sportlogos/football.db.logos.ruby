@@ -9,7 +9,7 @@ Hoe.spec 'footballdb-logos' do
   self.summary = 'footballdb-logos gem - football league club logos (24x24, 32x32, 48x48, 64x64) bundled for reuse w/ asset pipeline'
   self.description = summary
 
-  self.urls    = ['https://github.com/geraldb/football.db.logos.ruby']
+  self.urls    = ['https://github.com/sportlogos/football.db.logos.ruby']
 
   self.author  = 'Gerald Bauer'
   self.email   = 'opensport@googlegroups.com'
@@ -19,6 +19,8 @@ Hoe.spec 'footballdb-logos' do
 
 end
 
+
+require 'pp'
 
 ################################
 #
@@ -35,6 +37,41 @@ LOGO_SIZES = [24,32]
 LOGO_INPUT_DIR = '../football.db.logos'
 
 LOGO_OUTPUT_DIR = 'vendor/assets/images/logos'
+
+
+
+
+require './scripts/album'
+
+
+desc 'test build_album()'
+task :test_album do
+  album = build_album_struct( LOGO_INPUT_DIR, title: 'football.db.logos', size: 24 )
+  pp album
+
+  puts render_album( album )
+end
+
+
+desc 'footballdb-logos - build album pages'
+task :albums do
+
+  ## build one album page per logo size (e.g. 24x24, 32x32 etc.)
+  LOGO_SIZES.each do |size|
+    build_album( LOGO_INPUT_DIR, title: "football.db.logos #{size}x#{size}", size: size )
+  end
+
+  ## keep dirs/folder org structure
+  ##
+  
+  ## get dirs ?  how can we get only dirs ?? - loop over dirs
+  ##  -- add scripts folder   - add album.rb, helpers.rb, 
+  ##  -- add templates folder  - move Manfifest.txt to template folder
+  ##  -- add _pages folder
+
+  ## todo: generate lookup list of all available labels (lets us check if label exists)
+  puts 'Done.'
+end
 
 
 desc 'footballdb-logos - build thumbs'

@@ -3,8 +3,8 @@
 footballdb-logos gem - football league club logos
 bundled for reuse w/ asset pipeline
 
-* home  :: [github.com/geraldb/football.db.logos.ruby](https://github.com/geraldb/football.db.logos.ruby)
-* bugs  :: [github.com/geraldb/football.db.logos.ruby/issues](https://github.com/geraldb/football.db.logos.ruby/issues)
+* home  :: [github.com/sportlogos/football.db.logos.ruby](https://github.com/sportlogos/football.db.logos.ruby)
+* bugs  :: [github.com/sportlogos/football.db.logos.ruby/issues](https://github.com/sportlogos/football.db.logos.ruby/issues)
 * forum :: [groups.google.com/group/opensport](https://groups.google.com/group/opensport)
 
 ## Usage
@@ -12,13 +12,4 @@ bundled for reuse w/ asset pipeline
 TBD
 
 
-
-
-## Dev Notes
-
-Use 
-
-    $ rake debug_gem > footballdb-logos.gemspec
-
-to update (auto-generate) gemspec.
 
