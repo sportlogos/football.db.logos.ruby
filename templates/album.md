@@ -5,10 +5,5 @@
 
 #### {{ section.title }} ({{ section.pictures.size }})
 
-  {% section.pictures.each do |picture| %}
-    ..
-    _{{ picture.title }}_{:.key} ++
-    ![{{ picture.title }}]({{ picture.path }})
-  {% end %}
-
+  {{ render_pictures( section.pictures, opts ) }}
 {% end %}

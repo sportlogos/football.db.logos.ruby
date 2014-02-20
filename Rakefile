@@ -22,9 +22,6 @@ end
 
 require 'pp'
 
-################################
-#
-
 
 # ls *.jpg | xargs -r -I FILE convert FILE -thumbnail 64x64 FILE_thumb.png
 
@@ -46,10 +43,10 @@ require './scripts/album'
 
 desc 'test build_album()'
 task :test_album do
-  album = build_album_struct( LOGO_INPUT_DIR, title: 'football.db.logos', size: 24 )
+  album = HyBook::Album.create_from_folder( LOGO_INPUT_DIR, title: 'football.db.logos' )
   pp album
 
-  puts render_album( album )
+  puts render_album( album, size: 24 )
 end
 
 
