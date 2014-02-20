@@ -20,9 +20,6 @@ Hoe.spec 'footballdb-logos' do
 end
 
 
-require 'pp'
-
-
 # ls *.jpg | xargs -r -I FILE convert FILE -thumbnail 64x64 FILE_thumb.png
 
 ## LOGO_SIZES = [24,32,48,64]  # e.g. 24x24, 32x32, etc.
@@ -36,39 +33,41 @@ LOGO_INPUT_DIR = '../football.db.logos'
 LOGO_OUTPUT_DIR = 'vendor/assets/images/logos'
 
 
+require 'hybook'
 
 
-require './scripts/album'
-
-
-desc 'test build_album()'
-task :test_album do
+desc 'debug build album'
+task :debug_album do
   album = HyBook::Album.create_from_folder( LOGO_INPUT_DIR, title: 'football.db.logos' )
   pp album
 
-  puts render_album( album, size: 24 )
+  puts HyBook.render_album( album, size: 24 )
 end
 
 
 desc 'footballdb-logos - build album pages'
 task :albums do
 
+  PAGES_DIR = './site'
+
+  album =  HyBook::Album.create_from_folder( LOGO_INPUT_DIR, title: 'football.db.logos' ) 
+
   ## build one album page per logo size (e.g. 24x24, 32x32 etc.)
   LOGO_SIZES.each do |size|
-    build_album( LOGO_INPUT_DIR, title: "football.db.logos #{size}x#{size}", size: size )
-  end
 
-  ## keep dirs/folder org structure
-  ##
-  
-  ## get dirs ?  how can we get only dirs ?? - loop over dirs
-  ##  -- add scripts folder   - add album.rb, helpers.rb, 
-  ##  -- add templates folder  - move Manfifest.txt to template folder
-  ##  -- add _pages folder
+    TextUtils::Page.create( "#{PAGES_DIR}/#{size}.md", frontmatter: {
+                                                          layout: 'album',
+                                                          title: album.title,
+                                                          permalink: "/#{size}.html" } ) do |page|
+        page.write HyBook.render_album( album,
+                                          title: "football.db.logos #{size}x#{size}",
+                                          size: size )
+    end # page
+  end # each LOGO_SIZES
 
-  ## todo: generate lookup list of all available labels (lets us check if label exists)
   puts 'Done.'
 end
+
 
 
 desc 'footballdb-logos - build thumbs'
